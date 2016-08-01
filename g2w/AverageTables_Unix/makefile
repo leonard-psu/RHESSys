@@ -1,7 +1,7 @@
 PGM = rat
 CC  = gcc 
 RHESSYS_BIN = /usr/local/bin
-GISLIB = -lgrass_gis
+GISLIB = -lgrass_gis -lgrass_raster
 CFLAGS = -g
 OBJECTS = \
 main.o \
@@ -19,7 +19,7 @@ else
 endif
 
 main.o:
-	$(CC) $(CFLAGS) -I$(GISBASE)/include -c main.c -o main.o
+	$(CC) $(CFLAGS) -I/usr/include/gdal -I$(GISBASE)/include -c main.c -o main.o
 log.o:
 
 install:
