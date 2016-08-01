@@ -5,7 +5,7 @@ CC  = gcc
 INCLUDES = -Iinclude
 CFLAGS = -I$(GISBASE)/include -g -Wall -std=c99
 CFLAGS_TESTS = `pkg-config --cflags glib-2.0` -g -Wall -std=c99
-LDLIBS = -L$(GISBASE)/lib -lm -lgrass_gis
+LDLIBS = -L$(GISBASE)/lib -lm -lgrass_gis -lgrass_raster -lgrass_vedit
 LDLIBS_TESTS = `pkg-config --libs glib-2.0` -L$(GISBASE)/lib -lm -lgrass_gis
 
 ifdef COVERAGE
