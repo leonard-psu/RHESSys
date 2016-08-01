@@ -66,9 +66,14 @@
 	Changed long to int for compatibility issues, AD, April 2011
 */
 
+//https://trac.osgeo.org/grass/wiki/Grass7/RasterLib/ListOfFunctions
+//Function names change to grass raster and vector etc
 
 #include	<grass/gis.h>
-#include	<grass/gisdefs.h>
+//ORG #include	<grass/gisdefs.h>
+#include	<grass/raster.h>
+#include	<grass/vector.h>
+#include        <grass/glocale.h>
 #include	<stdio.h>        
 #include	<stdlib.h>       
 #include	<string.h>       
@@ -248,7 +253,9 @@ char *argv[];
 			}
 			// have to use temp_table because G_find_cell alters it (p.100 of manual)
 			strcpy(temp_table, table[i]);
-			if (!(mapset = G_find_cell(temp_table, "")))
+			//ORG if (!(mapset = G_find_cell(temp_table, "")))
+			mapset = G_find_raster(temp_table, "");
+			if (mapset == NULL)
 			{
 				printf("Raster map %s not found\n", table[i]);	
 				/* Logging is currently broken, but want to get this error message out
@@ -585,7 +592,8 @@ char *argv[];
 				}
 			}
 			if (type[covermap] == 'L')
-				sscanf (G_get_cat((CELL)covercat, &cats), "%lf", &x);
+				//ORG sscanf (G_get_cat((CELL)covercat, &cats), "%lf", &x);
+				sscanf (Rast_get_c_cat((CELL)covercat, &cats), "%lf", &x);
 			else
 				x = (double)covercat;
 			sum1 += x * area;
